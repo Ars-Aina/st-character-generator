@@ -20,8 +20,8 @@
    - *Poof!* JSON appears
    - Copy or download it
 
-3. **Advanced stuff** (optional)
-   - Toggle ⚙️ for scenarios/first messages
+3. **Advanced stuff**
+   - Toggle ⚙️ to setup the LLM
    - Needs [OpenRouter API key](https://openrouter.ai/keys)
 
 ## 🧩 Features
@@ -29,13 +29,12 @@
 - **Automatic description generator** - Turns messy notes into clean AI food
 - **Example messages** - Shows how your character talks
 - **Tag system** - Organize your creations
-- **Pretty JSON** - With colors and everything!
+- **Pretty UI** - With colors and everything!
 
 ## 🚨 Known Issues
 
-- Sometimes naps during long generations
-- May add too many cat emojis (not sorry)
-- Tags stick like gum to hair
+- Sometimes naps during long generations (Openrouter-kun is probably busy~)
+- Don't support image metadata yet (Working On It!!!)
 
 *Aina's note: Remember to save your API key in settings!*
 
