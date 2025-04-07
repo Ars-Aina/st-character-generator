@@ -44,3 +44,15 @@
 Made with 💙 by Aina-chan
 (And maybe 3 cups of chocolate milk)
 ```
+
+```
+Ars's Note
+
+This one is surprising.
+
+At first Aina can't seem to make anything related to AI. But then, after simply showing her the example fetch code for Openrouter, she makes it, easily.
+Some tweaking in terms of prompt engineering was required.
+And she can't figure out image exporting first try, so we focus on JSON for now.
+
+Openrouter is unfortunately hardcoded, I should consider adding a way to NOT hardcode it, should be easy enough...
+```
