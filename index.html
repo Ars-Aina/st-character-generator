@@ -773,7 +773,7 @@
 
                 try {
                     // First, generate the character description from the prompt
-                    const description = await generateDescription(apiKey, characterPrompt);
+                    const description = await generateDescription(apiKey, characterPrompt, characterName);
                     
                     // Then create the full JSON structure
                     const characterCard = {
@@ -817,7 +817,7 @@
                 }
             });
 
-            async function generateDescription(apiKey, prompt) {
+            async function generateDescription(apiKey, prompt, name) {
                 const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                     method: "POST",
                     headers: {
@@ -833,7 +833,7 @@
                             },
                             {
                                 "role": "user",
-                                "content": `Create a detailed character description based on this prompt: "${prompt}". The description should include the character's history, speech pattern, personality, behavior, and appearance. Make it dense and easily understandable by AI.`
+                                "content": `Create a detailed character named ${name} description based on this prompt: "${prompt}". The description should include the ${name}'s history, speech pattern, personality, behavior, and appearance. Make it dense and easily understandable by AI.`
                             },
                             {
                                 "role": "assistant",
