@@ -7,28 +7,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #6d28d9;
-            --primary-dark: #5b21b6;
-            --secondary: #f5f3ff;
-            --text: #1f2937;
-            --text-light: #6b7280;
+            --primary: #00a2ff;
+            --primary-dark: #0077cc;
+            --secondary: #00d9a3;
+            --accent: #7b2dff;
+            --text: #2d3748;
+            --text-light: #718096;
             --bg: #ffffff;
-            --border: #e5e7eb;
-            --error: #ef4444;
-            --success: #10b981;
+            --card-bg: #f8fafc;
+            --border: #e2e8f0;
+            --error: #ff4d4d;
+            --success: #00c781;
+            --neon-glow: 0 0 10px rgba(0, 210, 255, 0.5);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
         }
 
         body {
-            background-color: var(--secondary);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
             color: var(--text);
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         .container {
@@ -40,17 +44,57 @@
         header {
             text-align: center;
             margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--secondary);
+            box-shadow: var(--neon-glow);
         }
 
         h1 {
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 162, 255, 0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
         }
 
         .subtitle {
             color: var(--text-light);
             font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .subtitle::before, .subtitle::after {
+            content: '✦';
+            color: var(--accent);
+            margin: 0 0.5rem;
         }
 
         .main-content {
@@ -66,46 +110,74 @@
         }
 
         .card {
-            background-color: var(--bg);
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             padding: 1.5rem;
             height: 100%;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 162, 255, 0.15);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
 
         .card-title {
             font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             color: var(--primary);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .card-title i {
+            color: var(--accent);
         }
 
         .form-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
         label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
+            color: var(--text);
+            font-size: 0.95rem;
         }
 
         input, textarea, select {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.75rem 1rem;
             border: 1px solid var(--border);
-            border-radius: 0.375rem;
+            border-radius: 8px;
             font-size: 1rem;
-            transition: border-color 0.2s;
+            transition: all 0.3s;
+            background-color: var(--bg);
         }
 
         input:focus, textarea:focus, select:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.1);
+            box-shadow: 0 0 0 3px rgba(0, 162, 255, 0.2);
         }
 
         textarea {
@@ -118,36 +190,60 @@
             align-items: center;
             justify-content: center;
             padding: 0.75rem 1.5rem;
-            border-radius: 0.375rem;
+            border-radius: 8px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
             border: none;
             gap: 0.5rem;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
             background-color: var(--primary);
             color: white;
+            box-shadow: 0 4px 6px rgba(0, 162, 255, 0.2);
         }
 
         .btn-primary:hover {
             background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 162, 255, 0.3);
         }
 
         .btn-secondary {
-            background-color: var(--border);
+            background-color: var(--card-bg);
             color: var(--text);
+            border: 1px solid var(--border);
         }
 
         .btn-secondary:hover {
-            background-color: #d1d5db;
+            background-color: #edf2f7;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
         .btn-group {
             display: flex;
             gap: 1rem;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
 
         .preview-container {
@@ -155,51 +251,65 @@
         }
 
         .json-preview {
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Fira Code', 'Courier New', monospace;
             white-space: pre-wrap;
-            background-color: #f8f8f8;
+            background-color: #f1f5f9;
             padding: 1rem;
-            border-radius: 0.375rem;
+            border-radius: 8px;
             max-height: 500px;
             overflow-y: auto;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            border: 1px solid var(--border);
         }
 
         .copy-btn {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.9);
             border: 1px solid var(--border);
-            border-radius: 0.25rem;
-            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            padding: 0.35rem 0.75rem;
             cursor: pointer;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
         }
 
         .copy-btn:hover {
             background-color: var(--bg);
+            color: var(--primary);
         }
 
         .settings-btn {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            width: 50px;
-            height: 50px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 162, 255, 0.3);
+            transition: all 0.3s;
+            z-index: 10;
+            border: none;
         }
 
         .settings-btn:hover {
-            background-color: var(--primary-dark);
-            transform: scale(1.05);
+            transform: scale(1.1) rotate(30deg);
+            box-shadow: 0 6px 20px rgba(0, 162, 255, 0.4);
+        }
+
+        .settings-btn i {
+            font-size: 1.2rem;
         }
 
         .modal {
@@ -215,7 +325,8 @@
             z-index: 1000;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.2s;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(5px);
         }
 
         .modal.active {
@@ -224,14 +335,26 @@
         }
 
         .modal-content {
-            background-color: var(--bg);
-            border-radius: 0.5rem;
+            background-color: var(--card-bg);
+            border-radius: 12px;
             width: 90%;
             max-width: 500px;
             padding: 1.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             transform: translateY(-20px);
-            transition: transform 0.2s;
+            transition: transform 0.3s;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            position: relative;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
 
         .modal.active .modal-content {
@@ -249,6 +372,9 @@
             font-size: 1.25rem;
             font-weight: 600;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .close-btn {
@@ -257,27 +383,33 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--text-light);
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: var(--primary);
         }
 
         .alert {
             padding: 1rem;
-            border-radius: 0.375rem;
+            border-radius: 8px;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            font-size: 0.9rem;
         }
 
         .alert-success {
-            background-color: #ecfdf5;
+            background-color: rgba(0, 199, 129, 0.1);
             color: var(--success);
-            border: 1px solid #a7f3d0;
+            border: 1px solid rgba(0, 199, 129, 0.3);
         }
 
         .alert-error {
-            background-color: #fef2f2;
+            background-color: rgba(255, 77, 77, 0.1);
             color: var(--error);
-            border: 1px solid #fecaca;
+            border: 1px solid rgba(255, 77, 77, 0.3);
         }
 
         .loading {
@@ -302,19 +434,25 @@
         }
 
         .tag {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 0.25rem 0.75rem;
             border-radius: 9999px;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
             gap: 0.25rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .tag-remove {
             cursor: pointer;
             font-size: 0.75rem;
+            transition: transform 0.2s;
+        }
+
+        .tag-remove:hover {
+            transform: scale(1.2);
         }
 
         .tag-input input {
@@ -367,11 +505,43 @@
         }
 
         input:checked + .slider {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
 
         input:checked + .slider:before {
             transform: translateX(26px);
+        }
+
+        /* Sci-fi elements */
+        .tech-border {
+            position: relative;
+        }
+
+        .tech-border::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -715,7 +885,7 @@ async function generateFirstMessage(apiKey, name, description) {
                             },
                             {
                                 "role": "user",
-                                "content": `Generate a novel style scene setup where ${name} meets someone close to them that they've already known". Make this setup 3 to 4 paragraphs long and reflect the character's personality and speech patterns and the sort of situation they usually deal with everyday. Format in a standard novel format. No fancy markdown or formatting. Write nothing about what happened to the new person, end this scene immediately after ${name} meets the person.`
+                                "content": `${name}'s character description: ${description}. \n\nGenerate a novel style scene setup where ${name} meets someone close to them that they've already known". Make this setup 3 to 4 paragraphs long and reflect the character's personality and speech patterns and the sort of situation they usually deal with everyday. Format in a standard novel format. No fancy markdown or formatting. Write nothing about what happened to the new person, end this scene immediately after ${name} meets the person.`
                             },
                             {
                                 "role": "assistant",
